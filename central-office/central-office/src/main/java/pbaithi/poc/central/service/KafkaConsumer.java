@@ -37,7 +37,7 @@ public class KafkaConsumer {
         TransactionDTO txnDTO = objectMapper.readValue(message, TransactionDTO.class);
         Transaction receivedTransaction = modelMapper.map(txnDTO,Transaction.class);
         log.info("RECEIVED T/R DETAILS : {} ",receivedTransaction);
-        receivedTransaction.setId(null);
+//        receivedTransaction.setId(null);
         repository.save(receivedTransaction);
         log.info("Transaction saved to main DB: {}", receivedTransaction);
     }

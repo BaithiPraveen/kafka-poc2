@@ -14,7 +14,7 @@ public class Transaction {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long branchId;
     private String type;
     private Double amount;
     private LocalDateTime timestamp;
