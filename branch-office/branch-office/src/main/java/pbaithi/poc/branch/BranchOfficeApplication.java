@@ -22,7 +22,7 @@ public class BranchOfficeApplication {
 	public ObjectMapper objectMapper() {
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.registerModule(new JavaTimeModule());
-		mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS); // optional: use ISO format
+		mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
 		return mapper;
 	}
 

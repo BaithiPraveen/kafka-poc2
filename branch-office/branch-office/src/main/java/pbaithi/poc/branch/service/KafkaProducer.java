@@ -26,17 +26,10 @@ public class KafkaProducer {
 
     public void send(TransactionDTO transactionDTO) throws JsonProcessingException {
         log.info("sending data into KAFKA : {}",transactionDTO);
-//        Message<TransactionDTO> message = MessageBuilder
-//                .withPayload(transaction)
-//                .setHeader(KafkaHeaders.TOPIC,topic)
-//                .build();
-//        kafkaTemplate.send(topic, transaction);
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.registerModule(new JavaTimeModule());
         String json = objectMapper.writeValueAsString(transactionDTO);
-        kafkaTemplate.send("transactions", json);
-
-//        kafkaTemplate.send(message);
+        kafkaTemplate.send(topic, json);
         log.info("msg sent successfully..!");
     }
 }

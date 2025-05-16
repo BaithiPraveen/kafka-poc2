@@ -25,10 +25,10 @@ public class TransactionService {
     public Transaction createTransaction(Transaction txn) throws JsonProcessingException {
         log.info("sending data into emargency db : {}",txn.getType());
         Transaction saved = repository.save(txn);
-        log.info("succefully inserted data : {} ",saved);
+        log.info("successfully inserted data : {} ",saved);
         TransactionDTO txnDTO = modelMapper.map(saved, TransactionDTO.class);
-        producer.send(txnDTO); // Send to Kafka after saving to branch db
-        log.info("succefully inserted in main db ");
+        producer.send(txnDTO);
+        log.info("successfully inserted in main db ");
         return saved;
     }
 }
