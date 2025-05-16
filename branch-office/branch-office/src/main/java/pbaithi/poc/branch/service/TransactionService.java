@@ -10,6 +10,8 @@ import pbaithi.poc.branch.dto.TransactionDTO;
 import pbaithi.poc.branch.model.Transaction;
 import pbaithi.poc.branch.repository.TransactionRepo;
 
+import java.util.List;
+
 @Slf4j
 @Service
 public class TransactionService {
@@ -23,12 +25,20 @@ public class TransactionService {
     private ModelMapper modelMapper;
 
     public Transaction createTransaction(Transaction txn) throws JsonProcessingException {
-        log.info("sending data into emargency db : {}",txn.getType());
+        log.info("sending data into emargency db : {}", txn.getType());
         Transaction saved = repository.save(txn);
-        log.info("successfully inserted data : {} ",saved);
+        log.info("successfully inserted data : {} ", saved);
         TransactionDTO txnDTO = modelMapper.map(saved, TransactionDTO.class);
         producer.send(txnDTO);
         log.info("successfully inserted in main db ");
         return saved;
+    }
+
+    public Transaction getTransactionById(Long id) {
+        return repository.findById(id).orElse(null);
+    }
+
+    public List<Transaction> getAllTransactions() {
+        return repository.findAll();
     }
 }
