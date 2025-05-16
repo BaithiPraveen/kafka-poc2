@@ -1,5 +1,6 @@
 package pbaithi.poc.branch.controler;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,7 +17,7 @@ public class TransactionController {
     private TransactionService service;
 
     @PostMapping
-    public ResponseEntity<Transaction> create(@RequestBody Transaction txn) {
+    public ResponseEntity<Transaction> create(@RequestBody Transaction txn) throws JsonProcessingException {
         return ResponseEntity.ok(service.createTransaction(txn));
     }
 }

@@ -1,9 +1,12 @@
 package pbaithi.poc.branch.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;
+import pbaithi.poc.branch.dto.TransactionDTO;
 import pbaithi.poc.branch.model.Transaction;
 import pbaithi.poc.branch.repository.TransactionRepo;
 
@@ -16,11 +19,15 @@ public class TransactionService {
     @Autowired
     private KafkaProducer producer;
 
-    public Transaction createTransaction(Transaction txn) {
+    @Autowired
+    private ModelMapper modelMapper;
+
+    public Transaction createTransaction(Transaction txn) throws JsonProcessingException {
         log.info("sending data into emargency db : {}",txn.getType());
         Transaction saved = repository.save(txn);
         log.info("succefully inserted data : {} ",saved);
-        producer.send(saved); // Send to Kafka after saving to branch db
+        TransactionDTO txnDTO = modelMapper.map(saved, TransactionDTO.class);
+        producer.send(txnDTO); // Send to Kafka after saving to branch db
         log.info("succefully inserted in main db ");
         return saved;
     }
