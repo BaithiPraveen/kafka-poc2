@@ -6,7 +6,7 @@ import lombok.Data;
 import java.time.LocalDateTime;
 
 @Data
-public class TransactionDTO {
+public class CentralTransactionDTO {
     @JsonIgnore
     private Long id;
     private Long branchId;

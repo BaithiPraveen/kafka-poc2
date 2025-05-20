@@ -1,0 +1,12 @@
+package pabaithi.poc.base_domain.dto;
+
+import lombok.Data;
+import java.time.LocalDateTime;
+
+@Data
+public class TransactionDTO {
+    private Long branchId;
+    private String description;
+    private Double amount;
+    private LocalDateTime timestamp;
+}

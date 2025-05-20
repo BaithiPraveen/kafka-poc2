@@ -6,10 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;
-import pbaithi.poc.branch.dto.TransactionDTO;
 import pbaithi.poc.branch.model.Transaction;
 import pbaithi.poc.branch.repository.TransactionRepo;
-
 import java.util.List;
 
 @Slf4j
