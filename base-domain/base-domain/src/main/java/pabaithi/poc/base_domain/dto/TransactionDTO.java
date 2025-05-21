@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 @Data
 public class TransactionDTO {
     private Long branchId;
-    private String description;
+    private String type;
     private Double amount;
     private LocalDateTime timestamp;
 }

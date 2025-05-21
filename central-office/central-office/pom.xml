@@ -31,7 +31,7 @@
 	</properties>
 	<dependencies>
 		<dependency>
-			<groupId>pabaithi.poc</groupId>
+			<groupId>pbaithi.poc</groupId>
 			<artifactId>base-domain</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
