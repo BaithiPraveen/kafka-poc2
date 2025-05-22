@@ -10,7 +10,7 @@ import pbaithi.poc.branch.service.TransactionService;
 import java.util.List;
 
 @RestController
-@RequestMapping("branch-office/transactions")
+@RequestMapping("/branch-office/transactions")
 public class TransactionController {
     @Autowired
     private TransactionService service;
