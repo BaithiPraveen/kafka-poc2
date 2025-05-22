@@ -1,5 +1,6 @@
 package pbaithi.poc.branch.service;
 
+import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,12 @@ public class KafkaConsumer {
 
     @Autowired
     private ModelMapper modelMapper;
+
+    @PostConstruct
+    public void configureMapper() {
+        modelMapper.typeMap(TransactionDTO.class, Transaction.class)
+                .addMappings(mapper -> mapper.skip(Transaction::setBranchId));
+    }
 
     @KafkaListener(topics = "${kafka.topic.name}", groupId = "${spring.kafka.consumer.group-id}")
     public void listen(TransactionDTO transactionDTO){
