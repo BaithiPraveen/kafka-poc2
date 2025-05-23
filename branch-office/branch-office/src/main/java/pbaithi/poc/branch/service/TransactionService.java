@@ -1,6 +1,6 @@
 package pbaithi.poc.branch.service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
+import org.springframework.beans.factory.annotation.Value;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,14 +23,19 @@ public class TransactionService {
     @Autowired
     private ModelMapper modelMapper;
 
-    public Transaction createTransaction(Transaction txn) throws JsonProcessingException {
-        log.info("sending data into emargency db : {}", txn.getType());
-        Transaction saved = repository.save(txn);
-        log.info("successfully inserted data into branch db: {} ", saved);
-        TransactionDTO txnDTO = modelMapper.map(saved, TransactionDTO.class);
+    @Value("${branch-code}")
+    private String branchCode;
+
+    public void createTransaction(Transaction txn){
+//        log.info("sending data into branch db : {}", txn.getType());
+//        Transaction saved = repository.save(txn);
+//        log.info("successfully inserted data into branch db: {} ", saved);
+
+        txn.setBranchCode(branchCode);
+        TransactionDTO txnDTO = modelMapper.map(txn, TransactionDTO.class);
         producer.send(txnDTO);
         log.info("successfully sent to KAFKA Service...! ");
-        return saved;
+        return;
     }
 
     public Transaction getTransactionById(Long id) {

@@ -9,4 +9,8 @@ public class TransactionDTO {
     private String type;
     private Double amount;
     private LocalDateTime timestamp;
+    private String branchCode;
+    private Integer userNumber;
+    private String userName;
+    private  String email;
 }

@@ -15,6 +15,10 @@ public class Transaction {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Long branchId;
+    private Integer userNumber;
+    private String userName;
+    private String branchCode;
+    private  String email;
     private String type;
     private Double amount;
     private LocalDateTime timestamp;

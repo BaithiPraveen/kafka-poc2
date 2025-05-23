@@ -16,8 +16,9 @@ public class TransactionController {
     private TransactionService service;
 
     @PostMapping
-    public ResponseEntity<Transaction> create(@RequestBody Transaction txn) throws JsonProcessingException {
-        return ResponseEntity.ok(service.createTransaction(txn));
+    public ResponseEntity<String> create(@RequestBody Transaction txn){
+        service.createTransaction(txn);
+        return ResponseEntity.ok("TXN sent successfully to KAFKA");
     }
 
     @GetMapping("/{id}")
